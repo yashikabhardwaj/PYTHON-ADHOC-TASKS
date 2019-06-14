@@ -1,0 +1,26 @@
+QUESTION:write a python code to do the following
+
+i)  take input from user and search in google
+ii)   pick the first 3 url of google search
+iii)  make  QR-code of all 3 url's
+iv)   Store all these qr-code in  apache web server in aws cloud
+v)   share link of qrcode using aws public IP
+
+Note:   v) option you can do it manually there is no need of programing
+
+#!/usr/bin/python3
+from googlesearch import search
+import pyqrcode
+url = input('Enter text to search')
+urllist = []
+u = 0
+for i in search(url,stop=3):
+	urllist.append(i)
+	print(i)
+
+# Generate a QR
+	qr = pyqrcode.create(i)
+# create and save file
+	qr.svg(f"qr{u}.svg",scale=2)
+	print(qr.terminal())
+	u = u+1
